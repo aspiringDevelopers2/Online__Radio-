@@ -3,7 +3,7 @@ const port = process.env.PORT;
 // Settting up the database
 const mongoose = require("mongoose");
 console.log(process.env.DATABASE_LOCAL);
-const dbCOnnection = async () => {
+const dbConnection = async () => {
   try {
     await mongoose.connect(process.env.DATABASE_LOCAL);
     console.log("Connected to database");
@@ -11,8 +11,7 @@ const dbCOnnection = async () => {
     console.log("Error connecting to the server");
   }
 };
-dbCOnnection();
-console.log("Connected to database");
+dbConnection();
 // Initializing the server
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);

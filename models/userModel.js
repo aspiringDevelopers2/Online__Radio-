@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "User must have a name"],
     trim: true,
+    unique: true,
   },
   password: {
     type: String,
@@ -37,4 +38,7 @@ userSchema.pre("save", async function (next) {
   this.passwordConfirm = undefined;
   next();
 });
+userSchema.methods.decrypts = async function (hashed, normal) {
+  return await bcrypt.compare(hashed, normal);
+};
 module.exports = mongoose.model("User", userSchema);
